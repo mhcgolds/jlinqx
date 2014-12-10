@@ -5,19 +5,19 @@ A Freak JavaScript ECMA6 Arrow function LINQ-like library(plus additional featur
 
 ### Disclaimer
 
-This is an experimental feature made for learning purposes only. Knowing that it was developed under an unfinished technology, it wasn't supposed to be implemented in any environment other than test/lab. Besides, this library is in BETA and may still haves implementation bugs.
+This is an experimental feature made for learning purposes only. Knowing that it was developed under an unfinished technology, it wasn't supposed to be implemented in any environment other than test/lab. Besides, this library is in BETA and may still haves implementation bugs, furthermore, it is not the intent of to implement everything available on LINQ so some methods(and overload of others as well) aren't implemented or can be slightly different from the original ones. This aims web development and JavaScript object/array management.
 
 ### About the library
 
-Different from others linq-style JavaScript libraries, this library implements Arrow Function which makes it get closer to the C# lambda feature. It doesn't need to parse and eval strings to simulate lambda or any other work around. Further, some other features regarding JavaScript objects that are useful nowadays were implemented as a plus to the object management, like local/sessionStorage management and built-in console.log() helper.
+Different from others linq-style JavaScript libraries, this library implements [Arrow Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) which makes it get closer to the C# lambda feature. It doesn't need to parse and eval strings to simulate lambda or any other work around. Further, some other features regarding JavaScript objects that are useful nowadays were implemented as a plus to the object management, like local/sessionStorage management and built-in console.log() helper.
 
 ### ECMA6
 
-ECMAScript 6th Edition(aka "Harmony" or "ES.Next") is just a specification to be implemented by the browsers engines(that current run the 5th version) which means that the implementation depends on each engine to be finished. This library only uses "arrow functions" of this news ECMA version, so, if your browser supports it, it will be ok to run this lib on it.
+[ECMAScript 6th Edition](http://en.wikipedia.org/wiki/ECMAScript#ECMAScript_Harmony_.286th_Edition.29)(aka "Harmony" or "ES.Next") is just a specification to be implemented by the browsers engines(that current run the 5th version) which means that the implementation depends on each engine to be finished. This library only uses "arrow functions" of this news ECMA version, so, if your browser supports it, it will be ok to run this lib on it.
 
 #### Running/Enabling
 
-As said before, you browser must support "arrow functions" which is a new feature of ECMAScript 6. Firefox already supports it. For Chrome, check out this post. IE, Safari and Opera still doesn't supports it. Check out if your browser supports it in this table.
+As said before, you browser must support "arrow functions" which is a new feature of ECMAScript 6. Firefox already supports it. For Chrome, check out [this post](http://stackoverflow.com/a/24011617/1267304). IE, Safari and Opera still doesn't supports it. Check out if your browser supports it in [this table](http://kangax.github.io/compat-table/es6/).
 
 ### Initialization
 
@@ -242,3 +242,5 @@ Note that must be called just one of LocalSet or SessionSet in the same chaining
 - Chainable/Stub: Chainable methods means that its not ended yet. These methods must be ended with .ToArray() or .ToJSON(); Stub methods means end-of-line methods, they will return something;
 - Single/Multiple: A Single method means that it should be called just once in the chain. There is no meaning on calling it twice. Multiple methods can be called how many times developer wants. If the method isn't chainable, it will be a stub by default.
 - Description: A description of the method purpose.
+
+Under MIT License.
