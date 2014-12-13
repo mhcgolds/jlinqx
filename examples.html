@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Freainq Examples</title>
+	<script src="https://rawgithub.com/mhcgolds/freainq/master/freainq.js" type="text/javascript"></script>
+	<script>
+	// Examples
+	var data = 
+	[
+		{
+			Name: "Marcio",
+			Age: 26
+		},
+		{
+			Name: "Teste",
+			Age: 30
+		},
+		{
+			Name: "Outro teste",
+			Age: 15
+		}
+	];
+	
+	console.log("#1",
+		freainq("the quick brown fox jumps over the lazy dog".split(" ")).Aggregate((workingSentence, next) => { return next + " " + workingSentence; })
+	);
+	
+	console.log("#2",
+		freainq(data).All((x) => x.Age > 1)
+	);
+	
+	console.log("#3",
+		freainq(data).Any(x => x.Age == 16)
+	);
+	
+	console.log("#4",
+		freainq([1,2,3,4]).Average()
+	);
+	
+	console.log("#5",
+		freainq(data).Average(x => x.Age)
+	);
+	
+	console.log("#6", 
+		freainq([1,2,3,4]).Concat([5,6,7,8]).ToArray()
+	);
+	
+	console.log("#7",
+		freainq(data).Count(x => x.Age > 20)
+	);
+	
+	console.log("#8",
+		freainq([1,2,3,4]).Count()
+	);
+	
+	console.log("#9", 
+		freainq([1,2,3,3,4,5,5,6,2]).Distinct().ToArray()
+	);
+	
+	freainq(data).Each(index => { if (this.Name == "Teste") return false; else console.log("#10 Each", this) });
+	
+	console.log("#11",
+		freainq(data).Where(x => x.Name.contains("este")).ElementAt(1)
+	);
+	
+	console.log("#12",
+		freainq(data).Where(x => x.Age > 1).Except(x => x.Name == "Marcio").ToArray()
+	);
+	
+	console.log("#13",
+		freainq(data).First(x => x.Age > 15).Name
+	);
+	
+	console.log("#14", 
+		freainq(data).IndexOf(x => x.Age == 15)
+	);
+	
+	console.log("#15",
+		freainq(data).Last(x => x.Name == "Teste").Age
+	);
+	
+	console.log("#16", 
+		freainq([1,2,3,1,2,3,1,2,3]).LastIndexOf(1)
+	);
+	console.log("#17",
+		freainq(data).LocalSet("dados").ToArray()
+	);
+	
+	console.log("#18",
+		freainq.LocalGet("dados").ToArray()
+	);
+	
+	console.log("#19",
+		freainq.LocalRemove("dados").ToArray()
+	);
+	
+	freainq(data).Log("#20 Log this!").Where(x => x.Age > 20).ToArray();
+	
+	console.log("#21",
+		freainq(data).Max(x => x.Age)
+	);
+	
+	console.log("#22",
+		freainq([7,3,5,8,4]).Max()
+	);
+	
+	console.log("#23",
+		freainq(data).Min(x => x.Age)
+	);
+	
+	console.log("#24",
+		freainq([7,3,5,8,4]).Min()
+	);
+	
+	console.log("#25", 
+		freainq(data).OrderBy(x => x.Name).ToArray()
+	);
+	
+	console.log("#26", 
+		freainq(data).OrderBy(x => parseInt(x.Age), true).ToArray()
+	);
+	
+	console.log("#27", 
+		freainq(data).OrderByDescending(x => parseInt(x.Age)).ToArray()
+	);
+	
+	console.log("#28",
+		freainq(data).Remove(x => x.Age > 20).ToArray()
+	);
+	
+	console.log("#29",
+		freainq(data).Remove(1).ToArray()
+	);
+	
+	console.log("#30", 
+		freainq(data).OrderBy(x => x.Name).Reverse().ToArray()
+	);
+	
+	console.log("#31",
+		freainq(data).Where(x => x.Name == "Teste" || x.Age == 26).Select(x => 
+		{
+			return { Person: x.Name + " (" + x.Age + ")" }
+		}).ToArray()
+	);
+	
+	console.log("#32",
+		freainq(data).Single(x => x.Age == 15).Name
+	);
+	
+	console.log("#33",
+		freainq(data).Skip(1).ToArray()
+	);
+	
+	console.log("#34",
+		freainq([1,2,3,4]).Sum()
+	);
+	
+	console.log("#35",
+		freainq(data).Sum(x => x.Age)
+	);
+	
+	console.log("#36",
+		freainq(data).Take(1).ToArray()
+	);
+	
+	console.log("#37",
+		freainq(data).Skip(1).Take(1).ToArray()
+	);
+	
+	console.log("#38",
+		freainq(data).ToArray()
+	);
+	
+	console.log("#39",
+		freainq(data).Where(x => x.Age > 20).ToJSON()
+	);
+	
+	console.log("#40",
+		freainq([1,2,3,3]).Union([2,1,4]).ToArray()
+	);
+	
+	console.log("#41",
+		freainq(data).Where(x => x.Name == "Teste").ToArray()
+	);
+	
+	console.log("#42",
+		freainq(data).Where(x => x.Name.contains("est")).ToArray()
+	);
+	
+	console.log("#43",
+		freainq([1,2,3,4]).Zip([5,6,7,8], (x, y) => { return x + y }).ToArray()
+	);
+	</script>
+</head>
+<body>
+
+<h3>Freainq Examples</h3>
+
+This are the example results from the doc page of <a href="https://github.com/mhcgolds/freainq">Freainq</a>. 
+Please check your console and be sure to follow <a href="https://github.com/mhcgolds/freainq#runningenabling">these instructions</a> in order to run the library.
+
+<h4>Method list</h4>
+
+<strong>Aggregate</strong>
+<pre>
+// Example #1
+freainq("the quick brown fox jumps over the lazy dog".split(" ")).Aggregate((workingSentence, next) => { return next + " " + workingSentence; })
+</pre>
+
+<strong>All</strong>
+<pre>
+// Example #2
+freainq(data).All((x) => x.Age > 1)
+</pre>
+
+<strong>Any</strong>
+<pre>
+// Example #3
+freainq(data).Any(x => x.Age == 16)
+</pre>
+
+<strong>Average</strong>
+<pre>
+// Example #4
+freainq([1,2,3,4]).Average()
+
+// Example #5
+freainq(data).Average(x => x.Age)
+</pre>
+
+<strong>Concat</strong>
+<pre>
+// Example #6
+freainq([1,2,3,4]).Concat([5,6,7,8]).ToArray()
+</pre>
+
+<strong>Count</strong>
+<pre>
+// Example #7
+freainq(data).Count(x => x.Age > 20)
+
+// Example #8
+freainq([1,2,3,4]).Count()
+</pre>
+
+<strong>Distinct</strong>
+<pre>
+// Example #9
+freainq([1,2,3,3,4,5,5,6,2]).Distinct().ToArray()
+</pre>
+
+<strong>Each</strong>
+<pre>
+// Example #10
+freainq(data).Each(index => 
+{ 
+if (this.Name == "Teste") return false; 
+else console.log("#27 Each", this) 
+});
+</pre>
+
+<strong>ElementAt</strong>
+<pre>
+// Example #11 - Using JS native .contains()
+freainq(data).Where(x => x.Name.contains("este")).ElementAt(1)
+</pre>
+
+<strong>Except</strong>
+<pre>
+// Example #12
+freainq(data).Where(x => x.Age > 1).Except(x => x.Name == "Marcio").ToArray()
+</pre>
+
+<strong>First</strong>
+<pre>
+// Example #13
+freainq(data).First(x => x.Age > 15).Name
+</pre>
+
+<strong>IndexOf</strong>
+<pre>
+// Example #14
+freainq(data).IndexOf(x => x.Age == 15)
+
+// For array
+freainq([1,2,3].IndexOf(2)
+</pre>
+
+<strong>Last</strong>
+<pre>
+// Example #15
+freainq(data).Last(x => x.Name == "Teste").Age
+</pre>
+
+<strong>LastIndexOf</strong>
+<pre>
+// Example #16
+freainq([1,2,3,1,2,3,1,2,3]).LastIndexOf(1)
+
+// For objects
+freainq(data).LastIndexOf(x => x.Age == 15)
+</pre>
+
+<strong>LocalGet</strong>
+<pre>
+// Example #17
+freainq.LocalGet("dados").ToArray()
+</pre>
+
+<strong>LocalSet</strong>
+<pre>
+// Example #18
+freainq(data).LocalSet("dados").ToArray()
+</pre>
+
+<strong>LocalRemove</strong>
+<pre>
+// Example #19
+freainq.LocalRemove("dados").ToArray()
+</pre>
+
+<strong>Log</strong>
+<pre>
+// Example #20
+freainq(data).Log("#26 Log this!").Where(x => x.Age > 20).ToArray();
+</pre>
+
+<strong>Max</strong>
+<pre>
+// Example #21
+freainq(data).Max(x => x.Age)
+
+// Example #22
+freainq([7,3,5,8,4]).Max()
+</pre>
+
+<strong>Min</strong>
+<pre>
+// Example #23
+freainq(data).Min(x => x.Age)
+
+// Example #24
+freainq([7,3,5,8,4]).Min()
+</pre>
+
+<strong>OrderBy</strong>
+<pre>
+// Example #25
+freainq(data).OrderBy(x => x.Name).ToArray()
+
+// Example #26 - With Descending parameter
+freainq(data).OrderBy(x => parseInt(x.Age), true).ToArray()
+</pre>
+
+<strong>OrderByDescending</strong>
+<pre>
+// Example #27 - Using JS native parseInt()
+freainq(data).OrderByDescending(x => parseInt(x.Age)).ToArray()
+</pre>
+
+<strong>Remove</strong>
+<pre>
+// Example #28
+freainq(data).Remove(x => x.Age > 20).ToArray()
+
+// Exaplme #29
+freainq(data).Remove(1).ToArray()
+</pre>
+
+<strong>Reverse</strong>
+<pre>
+// Example #30
+freainq(data).OrderBy(x => x.Name).Reverse().ToArray()
+</pre>
+
+<strong>Select</strong>
+<pre>
+// Example #31 - Select with a function
+freainq(data).Where(x => x.Name == "Teste" || x.Age == 26).Select(x => 
+{
+return { Person: x.Name + " (" + x.Age + ")" }
+}).ToArray()
+</pre>
+
+<strong>SessionGet</strong>
+<pre>
+freainq.SessionGet("dados").ToArray()
+</pre>
+
+<strong>SessionSet</strong>
+<pre>
+freainq(data).SessionSet("dados").ToArray()
+</pre>
+
+<strong>SessionRemove</strong>
+<pre>
+freainq(data).Any(x => x.Age == 16)
+</pre>
+
+<strong>Single</strong>
+<pre>
+// Example #32
+freainq(data).Single(x => x.Age == 15).Name
+</pre>
+
+<strong>Skip</strong>
+<pre>
+// Example #33
+freainq(data).Skip(1).ToArray()
+</pre>
+
+<strong>Sum</strong>
+<pre>
+// Example #34
+freainq([1,2,3,4]).Sum()
+
+// Example #35
+freainq(data).Sum(x => x.Age)
+</pre>
+
+<strong>Take</strong>
+<pre>
+// Example #36
+freainq(data).Take(1).ToArray()
+
+// Example #37		
+freainq(data).Skip(1).Take(1).ToArray()
+</pre>
+
+<strong>ToArray</strong>
+<pre>
+// Example #38
+freainq(data).ToArray()
+</pre>
+
+<strong>ToJSON</strong>
+<pre>
+// Example #39
+freainq(data).Where(x => x.Age > 20).ToJSON()
+</pre>
+
+<strong>Union</strong>
+<pre>
+// Example #40
+freainq([1,2,3,3]).Union([2,1,4]).ToArray()
+</pre>
+
+<strong>Where</strong>
+<pre>
+// Example #41
+freainq(data).Where(x => x.Name == "Teste").ToArray()
+
+// Example #42
+freainq(data).Where(x => x.Name.contains("est")).ToArray()
+</pre>
+
+<strong>Zip</strong>
+<pre>
+// Example #43
+freainq([1,2,3,4]).Zip([5,6,7,8], (x, y) => { return x + y }).ToArray()
+</pre>
+
+</body>
+</html>
