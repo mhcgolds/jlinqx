@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Freainq : A Freak JavaScript ECMA6 Arrow function LINQ-like library(plus additional features)">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Freainq</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mhcgolds/freainq">View on GitHub</a>
+
+          <h1 id="project_title">Freainq</h1>
+          <h2 id="project_tagline">A Freak JavaScript ECMA6 Arrow function LINQ-like library(plus additional features)</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mhcgolds/freainq/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mhcgolds/freainq/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="freainq" class="anchor" href="#freainq" aria-hidden="true"><span class="octicon octicon-link"></span></a>freainq</h1>
+
+<p>A Freak JavaScript ECMA6 Arrow function LINQ-like library(plus additional features)</p>
+
+<p><img src="http://th04.deviantart.net/fs71/200H/f/2012/039/f/9/ramones___we__re_outta_here__by_badluck_design-d4p41fi.jpg" alt="FreqINQ guy"></p>
+
+<h3>
+<a id="disclaimer" class="anchor" href="#disclaimer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Disclaimer</h3>
+
+<p>This is an experimental feature made for learning purposes only. Knowing that it was developed under an unfinished technology, it wasn't supposed to be implemented in any environment other than test/lab. Besides, this library is in BETA and may still haves implementation bugs, furthermore, it is not the intent of to implement everything available on LINQ so some methods(and overload of others as well) aren't implemented or can be slightly different from the original ones. This aims web development and JavaScript object/array management.</p>
+
+<h3>
+<a id="about-the-library" class="anchor" href="#about-the-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>About the library</h3>
+
+<p>Different from others linq-style JavaScript libraries, this library implements <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">Arrow Functions</a> which makes it get closer to the C# lambda feature. It doesn't need to parse and eval strings to simulate lambda or any other work around. Further, some other features regarding JavaScript objects that are useful nowadays were implemented as a plus to the object management, like local/sessionStorage management and built-in console.log() helper.</p>
+
+<h3>
+<a id="ecma6" class="anchor" href="#ecma6" aria-hidden="true"><span class="octicon octicon-link"></span></a>ECMA6</h3>
+
+<p><a href="http://en.wikipedia.org/wiki/ECMAScript#ECMAScript_Harmony_.286th_Edition.29">ECMAScript 6th Edition</a>(aka "Harmony" or "ES.Next") is just a specification to be implemented by the browsers engines(that current run the 5th version) which means that the implementation depends on each engine to be finished. This library only uses "arrow functions" of this news ECMA version, so, if your browser supports it, it will be ok to run this lib on it.</p>
+
+<h4>
+<a id="runningenabling" class="anchor" href="#runningenabling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running/Enabling</h4>
+
+<p>As said before, you browser must support "arrow functions" which is a new feature of ECMAScript 6. Firefox already supports it. For Chrome, check out <a href="http://stackoverflow.com/a/24011617/1267304">this post</a>. IE, Safari and Opera still doesn't supports it. Check out if your browser supports it in <a href="http://kangax.github.io/compat-table/es6/">this table</a>.</p>
+
+<h3>
+<a id="initialization" class="anchor" href="#initialization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Initialization</h3>
+
+<p>Start freainq passing either an object, array or a string with json.</p>
+
+<pre><code>// Using with an object
+var data = [
+    { Name: "Marcio", Age: 26 },
+    { Name: "Teste", Age: 30 }, 
+    { Name: "Outro teste", Age: 15 } 
+];
+feainq(data)
+
+// Using with an array
+feainq([1, 2, 3, 4, 5])
+
+// Using with a string with json content
+feainq('[{"Name":"Marcio","Age":26},{"Name":"Teste","Age":30},{"Name":"Outro teste","Age":15}]');
+</code></pre>
+
+<h3>
+<a id="methods" class="anchor" href="#methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Methods</h3>
+
+<p><strong>Aggregate</strong>(<em>fn</em>): [<em>object</em>]. Returns the result of the aggregate function. Only works with string or numbers.</p>
+
+<pre><code>freainq("the quick brown fox jumps over the lazy dog".split(" ")).Aggregate((workingSentence, next) =&gt; { return next + " " + workingSentence; })
+</code></pre>
+
+<p><strong>All</strong>(<em>c-fn</em>): [<em>bool</em>]. Check if all elements of the collection matchs the given condition.</p>
+
+<pre><code>freainq(data).All((x) =&gt; x.Age &gt; 1)
+</code></pre>
+
+<p><strong>Any</strong>(<em>c-fn</em>): [<em>bool</em>]. Returns true or false if any item is found in the collection by the given condition. Can be called w/o condition as well.</p>
+
+<pre><code>freainq(data).Any(x =&gt; x.Age == 16)
+</code></pre>
+
+<p><strong>Average</strong>(<em>[p]</em>): [<em>number</em>]. Returns the result average from an array of numbers or a numeric property.</p>
+
+<pre><code>freainq([1,2,3,4]).Average()
+
+freainq(data).Average(x =&gt; x.Age)
+</code></pre>
+
+<p><strong>Count</strong>(<em>[fn]</em>): [<em>number</em>]. Returns the total count of the matched items in the collection.</p>
+
+<pre><code>freainq(data).Count(x =&gt; x.Age &gt; 20)
+
+freainq([1,2,3,4]).Count()
+</code></pre>
+
+<p><strong>ElementAt</strong>(<em>n</em>): [<em>object/bool</em>]. Returns the item on the position of the given index. Returns false if the index is out of range.</p>
+
+<pre><code>// Using JS native .contains()
+freainq(data).Where(x =&gt; x.Name.contains("este")).ElementAt(1)
+</code></pre>
+
+<p><strong>Except</strong>(<em>c-fn</em>): [<em>Chainable</em>]. Multiple. Same as Where but in the other way. It excludes the matched items.</p>
+
+<pre><code>freainq(data).Where(x =&gt; x.Age &gt; 1).Except(x =&gt; x.Name == "Marcio").ToArray()
+</code></pre>
+
+<p><strong>First</strong>(<em>c-fn</em>): [<em>object/array</em>]. Returns the first item of the given condition. If none is found returns an empty collection.</p>
+
+<pre><code>freainq(data).First(x =&gt; x.Age &gt; 15).Name
+</code></pre>
+
+<p><strong>IndexOf</strong>(<em>c-fn/number</em>): [<em>number</em>]. Returns the index of the matched element. Returns -1 if none is found.</p>
+
+<pre><code>freainq(data).IndexOf(x =&gt; x.Age == 15)
+
+// For array
+freainq([1,2,3].IndexOf(2)
+</code></pre>
+
+<p><strong>Last</strong>(<em>c-fn</em>): [<em>object/array</em>]. Returns the last item of the given condition. If none is found, returns an empty collection.</p>
+
+<pre><code>freainq(data).Last(x =&gt; x.Name == "Teste").Age
+</code></pre>
+
+<p><strong>LastIndexOf</strong>(<em>c-fn/number</em>): [<em>number</em>]. Returns the index of the last matched element. Returns -1 if none is found.</p>
+
+<pre><code>freainq([1,2,3,1,2,3,1,2,3]).LastIndexOf(1)
+
+// For objects
+freainq(data).LastIndexOf(x =&gt; x.Age == 15)
+</code></pre>
+
+<p><strong>Max</strong>(<em>[p]</em>): [<em>number</em>]. Returns the maximum value of the given array or property.</p>
+
+<pre><code>freainq(data).Max(x =&gt; x.Age)
+
+freainq([7,3,5,8,4]).Max()
+</code></pre>
+
+<p><strong>Min</strong>(<em>[p]</em>): [<em>number</em>]. Returns the minimum value of the given array or property.</p>
+
+<pre><code>freainq(data).Min(x =&gt; x.Age)
+
+freainq([7,3,5,8,4]).Min()
+</code></pre>
+
+<p><strong>OrderBy</strong>(<em>c-fn/p, [bool]</em>): [<em>Chainable</em>]. Multiple. Orders the collection. Expects an function or an property. Can be nested so its excludes the .ThenBy(), e.g. .OrderBy(x =&gt; x.Name).OrderBy(x =&gt; x.Age) will be like .OrderBy(x =&gt; x.Name).ThenBy(x =&gt; x.Age). Receives an second parameter to act like .OrderByDescending(), so .OrderBy(x =&gt; x.Name, true) is the same as .OrderByDescending(x =&gt; x.Name).</p>
+
+<pre><code>freainq(data).OrderBy(x =&gt; x.Name).ToArray()
+
+freainq(data).OrderBy(x =&gt; parseInt(x.Age), true).ToArray()
+</code></pre>
+
+<p><strong>OrderByDescending</strong>(<em>c-fn/p</em>): [<em>Chainable</em>]. Multiple. Same as OrderBy(), but orders by descending order.</p>
+
+<pre><code>// Using JS native parseInt()
+freainq(data).OrderByDescending(x =&gt; parseInt(x.Age)).ToArray()
+</code></pre>
+
+<p><strong>Remove</strong>(<em>c-fn/n</em>): [<em>Chainable</em>]. Multiple. Remove the matched item by the given function or the given index.</p>
+
+<pre><code>freainq(data).Remove(x =&gt; x.Age &gt; 20).ToArray()
+
+freainq(data).Remove(1).ToArray()
+</code></pre>
+
+<p><strong>Reverse</strong>(): [<em>Chainable</em>]. Single. Reverses the collection.</p>
+
+<pre><code>freainq(data).OrderBy(x =&gt; x.Name).Reverse().ToArray()
+</code></pre>
+
+<p><strong>Select</strong>(<em>fn</em>): [<em>Chainable</em>]. Single. Format the result by the given function.</p>
+
+<pre><code>// Select with a function
+freainq(data).Where(x =&gt; x.Name == "Teste" || x.Age == 26).Select(x =&gt; 
+{
+    return { Person: x.Name + " (" + x.Age + ")" }
+}).ToArray()
+</code></pre>
+
+<p><strong>Single</strong>(<em>c-fn</em>): [<em>object/bool</em>]. Same as First but returns false if none is found.</p>
+
+<pre><code>freainq(data).Single(x =&gt; x.Age == 15).Name
+</code></pre>
+
+<p><strong>Skip</strong>(<em>n</em>): [<em>Chainable</em>]. Single. Forwards the result skipping n of the matched filters.</p>
+
+<pre><code>freainq(data).Skip(1).ToArray()
+</code></pre>
+
+<p><strong>Sum</strong>(<em>[p]</em>): [<em>number</em>]. Returns the sum of the values of the given array or property.</p>
+
+<pre><code>freainq([1,2,3,4]).Sum()
+
+freainq(data).Sum(x =&gt; x.Age)
+</code></pre>
+
+<p><strong>Take</strong>(<em>n</em>): [<em>Chainable</em>]. Single. Limits the result.</p>
+
+<pre><code>freainq(data).Take(1).ToArray()
+
+freainq(data).Skip(1).Take(1).ToArray()
+</code></pre>
+
+<p><strong>Where</strong>(<em>c-fn</em>): [<em>Chainable</em>]. Multiple. Adds a condition to the result.</p>
+
+<pre><code>freainq(data).Where(x =&gt; x.Name == "Teste").ToArray()
+</code></pre>
+
+<h4>
+<a id="chaing-ending-methods" class="anchor" href="#chaing-ending-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chaing ending methods</h4>
+
+<p><strong>ToArray</strong>(): Returns the result of the method chaining as an array.</p>
+
+<pre><code>freainq(data).ToArray()
+</code></pre>
+
+<p><strong>ToJSON</strong>(): Stringifies(JSON.stringify) the result of .ToArray(ToArray() is called by JSON itself, no need to call it too).</p>
+
+<pre><code>freainq(data).Where(x =&gt; x.Age &gt; 20).ToJSON()
+</code></pre>
+
+<h4>
+<a id="array-only-methods" class="anchor" href="#array-only-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Array only methods</h4>
+
+<p><strong>Concat</strong>(<em>array</em>): [<em>Chainable</em>]. Multiple. Concats an array to the given array.</p>
+
+<pre><code>freainq([1,2,3,4]).Concat([5,6,7,8]).ToArray()
+</code></pre>
+
+<p><strong>Distinct</strong>(): [<em>Chainable</em>]. Single. Removes the duplicate values(not valid for arrays of objects).</p>
+
+<pre><code>freainq([1,2,3,3,4,5,5,6,2]).Distinct().ToArray()
+</code></pre>
+
+<p><strong>Union</strong>(<em>array</em>): [<em>Chainable</em>]. Multiple. Concat the given array but removing the duplicate values(not valid for arrays of objects).</p>
+
+<pre><code>freainq([1,2,3,3]).Union([2,1,4]).ToArray()
+</code></pre>
+
+<p><strong>Zip</strong>(<em>array, fn</em>): [<em>Chainable</em>]. Multiple. Same as Concat, but runs the given function for both arrays in same position passing their respective values as parameters. The result is the function returned values.</p>
+
+<pre><code>freainq([1,2,3,4]).Zip([5,6,7,8], (x, y) =&gt; { return x + y }).ToArray()
+</code></pre>
+
+<h4>
+<a id="utilities" class="anchor" href="#utilities" aria-hidden="true"><span class="octicon octicon-link"></span></a>Utilities</h4>
+
+<p><strong>Log</strong>(<em>[string]</em>): [<em>Chainable</em>]. Single. Prints to the console the result of the ToArray/ToJSON with the given message(if given).</p>
+
+<pre><code>freainq(data).Log("#26 Log this!").Where(x =&gt; x.Age &gt; 20).ToArray();
+</code></pre>
+
+<p><strong>Each</strong>(<em>fn</em>): [<em>void</em>]. Perform an each loop on the result of ToArray(calls ToArray() by itself, no need to call it too) calling the given function.</p>
+
+<pre><code>freainq(data).Each(index =&gt; 
+{ 
+    if (this.Name == "Teste") return false; 
+    else console.log("#27 Each", this) 
+});
+</code></pre>
+
+<h4>
+<a id="storage-utilities" class="anchor" href="#storage-utilities" aria-hidden="true"><span class="octicon octicon-link"></span></a>Storage utilities</h4>
+
+<h5>
+<a id="set-methods" class="anchor" href="#set-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Set methods</h5>
+
+<p><strong>LocalSet</strong>(<em>string</em>): [<em>Chainable</em>]. Single. Inserts/Updates the given key to the browser resource's localStorage with the result of the .ToArray(don't calls ToArray()).</p>
+
+<pre><code>freainq(data).LocalSet("dados").ToArray()
+</code></pre>
+
+<p><strong>SessionSet</strong>(<em>string</em>): [<em>Chainable</em>]. Single. Same as LocalSet but in the sessionStorage.</p>
+
+<pre><code>freainq(data).SessionSet("dados").ToArray()
+</code></pre>
+
+<p>Note that must be called just one of LocalSet or SessionSet in the same chaining.</p>
+
+<h5>
+<a id="getremove-methodsstatic-methods" class="anchor" href="#getremove-methodsstatic-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get/Remove methods(Static methods)</h5>
+
+<p><strong>LocalGet</strong>(<em>string</em>): Gets the object in the localStorage by the given key.</p>
+
+<pre><code>freainq.LocalGet("dados").ToArray()
+</code></pre>
+
+<p><strong>SessionGet</strong>(<em>string</em>): Same as LocalGet but in the sessionStorage.</p>
+
+<pre><code>freainq.SessionGet("dados").ToArray()
+</code></pre>
+
+<p><strong>LocalRemove</strong>(<em>string</em>): Removes the object in the localStorage by the given key and returns it.</p>
+
+<pre><code>freainq.LocalRemove("dados").ToArray()
+</code></pre>
+
+<p><strong>SessionRemove</strong>(<em>string</em>): Same as LocalRemove but in the sessionStorage.</p>
+
+<pre><code>freainq(data).Any(x =&gt; x.Age == 16)
+</code></pre>
+
+<h3>
+<a id="summary" class="anchor" href="#summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary</h3>
+
+<p><strong>MethodName</strong>(<em>param1,param2,paramN,[optionalParam]</em>): [<em>Chainable/Stub</em>]. Single/Multiple. Description.</p>
+
+<ul>
+<li>MethodName: The method(function) name;</li>
+<li>Params: <em>[param]</em> = Optional param; <em>typeA/typeB</em> = Must be given or A or B; <em>fn</em> = A function;<em>c-fn</em> = A conditional function. Must return a boolean; <em>n</em> = A number; <em>p</em> = A parameter. e.g: x =&gt; x.Name;</li>
+<li>Chainable/Stub: Chainable methods means that its not ended yet. These methods must be ended with .ToArray() or .ToJSON(); Stub methods means end-of-line methods, they will return something;</li>
+<li>Single/Multiple: A Single method means that it should be called just once in the chain. There is no meaning on calling it twice. Multiple methods can be called how many times developer wants. If the method isn't chainable, it will be a stub by default.</li>
+<li>Description: A description of the method purpose.</li>
+</ul>
+
+<p>Under MIT License.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Freainq maintained by <a href="https://github.com/mhcgolds">mhcgolds</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
