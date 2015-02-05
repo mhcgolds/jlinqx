@@ -3,6 +3,8 @@ freainq
 
 A Freak JavaScript ECMA6 Arrow function LINQ-like library(plus additional features)
 
+[Check this @ Github pages](http://mhcgolds.github.io/freainq/)
+
 ### Disclaimer
 
 This is an experimental feature made for learning purposes only. Knowing that it was developed under an unfinished technology, it wasn't supposed to be implemented in any environment other than test/lab. Besides, this library is in BETA and may still haves implementation bugs, furthermore, it is not the intent of to implement everything available on LINQ so some methods(and overload of others as well) aren't implemented or can be slightly different from the original ones. This aims web development and JavaScript object/array management.
